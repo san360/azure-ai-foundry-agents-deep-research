@@ -275,3 +275,168 @@ Reasoning: **Organizing sources**
 
 Referencing credit lines for specific images and considering inline citations.
 
+
+AGENT>
+Reasoning: **Gathering Information**
+
+I’m looking into orca intelligence, communication systems, and recent findings up to 2025. This involves extensive research from scientific sources and highlighting areas of ongoing debate. 【1†Bing Search】
+
+Citation: [Bing Search: 'orca intelligence research 2023 or 2024 orca cognition'](https://www.bing.com/search?q=orca%20intelligence%20research%202023%20or%202024%20orca%20cognition)
+
+AGENT>
+Reasoning: **Organizing resources**
+
+I’m gathering a diverse mix of sources, from academic articles to blogs, to explore orca intelligence and language. Studying dialects, cultural food preferences, social learning, and emotional structures is essential. 【1†Bing Search】
+
+Citation: [Bing Search: 'orca brain intelligence neurons neocortex limbic spindle cells 2019'](https://www.bing.com/search?q=orca%20brain%20intelligence%20neurons%20neocortex%20limbic%20spindle%20cells%202019)
+
+AGENT>
+Reasoning: **Piecing together insights**
+
+For the orca intelligence and language study, I'm gathering info on neuroanatomy, social structures, vocalization, and recent research findings. Considering reflective self-awareness tests and cognitive effects of captivity. 【1†Bing Search】
+
+Citation: [Bing Search: 'orca mirror self-recognition orcas mirror test self-awareness 2020'](https://www.bing.com/search?q=orca%20mirror%20self-recognition%20orcas%20mirror%20test%20self-awareness%202020)
+
+AGENT>
+Reasoning: **Investigating the snippet**
+
+I’m exploring the possibility that the ScienceDirect article on "Mirror image processing in three marine mammal species" could provide evidence of a mark test for killer whales, potentially relevant to mirror-induced behavior in animals.
+
+
+AGENT>
+Reasoning: **Confirming the result**  
+I'm checking the search link and title to ensure accuracy. The snippet refers to "New views on PII ... 2001," possibly from ScienceDirect or another source. 【1†Bing Search】
+
+Citation: [Bing Search: '"killer whales behavior in front of a mirror" study'](https://www.bing.com/search?q=%22killer%20whales%20behavior%20in%20front%20of%20a%20mirror%22%20study)
+
+AGENT>
+Reasoning: **Navigating for abstracts**
+
+Checking the APA PsycNET link to navigate academic abstracts, possibly from journals like "Behavioural Processes."
+
+
+AGENT>
+Reasoning: **Tracing killer whale intelligence**
+
+OK, let me see. The abstract details a 2001 study where killer whales passed mark tests, highlighting their self-recognition and imitation skills. This suggests advanced cognitive abilities. 【1†Bing Search】
+
+Citation: [Bing Search: 'orca mimic human words hello study'](https://www.bing.com/search?q=orca%20mimic%20human%20words%20hello%20study)
+
+AGENT>
+Reasoning: **Crafting the article**
+
+I'm beginning with a research study summary for ScienceAlert, focusing on cooling mechanisms in sleeping turtles.
+
+
+AGENT>
+Reasoning: **Exploring orca communication**
+
+I'm piecing together sections on orca intelligence and communication, focusing on cognitive aspects, vocal learning, dialects, recent findings, and debates. 【1†Bing Search】
+
+Citation: [Bing Search: 'orca communication syntax language study killer whale vocabulary 2022'](https://www.bing.com/search?q=orca%20communication%20syntax%20language%20study%20killer%20whale%20vocabulary%202022)
+
+AGENT>
+Reasoning: **Gathering references**
+
+I checked various sources, from AI projects to educational websites, focusing on orca communication syntax and related studies.
+
+
+AGENT>
+Reasoning: **Laying out evidence**
+
+The LiveScience article details orcas exhibiting intelligence, showcasing cultural phenomena, social bonds akin to friendship, and emotions like grief. Each point is supported by studies, emphasizing their advanced social behaviors.
+
+
+AGENT>
+Reasoning: **Understanding orca cognition**
+
+I’m gathering insights on orca cognition, covering grandmother effects, brain capabilities, and social complexity through unique human-orca cooperation. Fascinating blend of intellect and social dynamics. 【1†Bing Search】
+
+Citation: [Bing Search: 'orca bait gulls with fish behavior problem solving'](https://www.bing.com/search?q=orca%20bait%20gulls%20with%20fish%20behavior%20problem%20solving)
+
+AGENT>
+Reasoning: **Examining sources**
+
+I’m piecing together insights from a variety of sources, ranging from credible science news outlets to blogs and newsletters, to analyze orcas' evolving problem-solving intelligence and their unique tactics like using fish as bait.
+
+
+AGENT>
+Reasoning: **Investigating orca culture**
+
+I'm digging into the surprising cultural learning observed in orcas, specifically their gull-baiting strategy. This innovation in feeding shows problem-solving and social learning, potentially unique beyond humans. 【1†Bing Search】
+
+Citation: [Bing Search: 'killer whale memory long term cognitive studies'](https://www.bing.com/search?q=killer%20whale%20memory%20long%20term%20cognitive%20studies)
+
+AGENT>
+Reasoning: **Piecing together**
+
+I'm gathering info on TheStranger's mention of emotional learning and long-term memory. Orcas' unique limbic system structures might explain their advanced processing.
+
+
+AGENT>
+Reasoning: **Understanding orca cognition**
+
+Highlight the unique brain structures and abilities of orcas, enriching their cognitive and emotional landscape.
+
+
+AGENT>
+Reasoning: **Converting whale communication**
+
+I'm piecing together the complexity of orca communication, noting dialects, mimicry, and the pursuit of potential syntax and semantics using machine learning for deep understanding. 【1†Bing Search】
+
+Citation: [Bing Search: '"syntax" "killer whale" vocalization'](https://www.bing.com/search?q=%22syntax%22%20%22killer%20whale%22%20vocalization)
+
+AGENT>
+Reasoning: **Monitoring orca behavior**
+
+OK, let me see. I'm analyzing recent 2025 findings and debates on whale intelligence, their communication systems, and social interactions. This includes exploring new research methodologies and controversies, specifically focusing on what makes orca communication unique.
+
+
+AGENT>
+Reasoning: **Decoding orca communication**
+
+The Earth Species blog is leveraging AI to decode orca communication, noting their rich vocal cultures and dialects. This involves analyzing patterns and actions against noise and acoustic lifelines.
+
+
+AGENT>
+Reasoning: **Investigating file format**  
+Checking the file's content and whether scrolling is possible.
+
+
+AGENT>
+Reasoning: **Document scanning threshold**
+
+Checking that the tool scanned PDFs from the first lines. Access seemed tough. Filled out the form as required. 【1†Bing Search】
+
+Citation: [Bing Search: 'Luke Rendell orcas attacking boats interpretation 2023'](https://www.bing.com/search?q=Luke%20Rendell%20orcas%20attacking%20boats%20interpretation%202023)
+
+AGENT>
+Reasoning: **Considering motivations**
+
+I'm digging into Luke Rendell's view on motivations. Are they tied to fads or single events? There’s no need for deep analysis, just a brief context.
+
+
+AGENT>
+Reasoning: **Analyzing orca intricacies**
+
+I'm mapping out slight peculiarities in orca behavior. Recent advancements and heated debates enrich the understanding of these intelligent creatures. 【1†Bing Search】
+
+Citation: [Bing Search: '2022 killer whale study cognition communication new findings 2022'](https://www.bing.com/search?q=2022%20killer%20whale%20study%20cognition%20communication%20new%20findings%202022)
+
+AGENT>
+Reasoning: **Examining orca innovation**
+
+A 2022 study by Manitzas-Hill taught killer whales to perform novel behaviors on cue, showcasing their creative problem-solving abilities.
+
+
+AGENT>
+Reasoning: **Evaluating cognitive abilities**
+
+Killer whales exhibit advanced cognitive skills, particularly in foraging and communication, echoing the complexity observed in smaller marine mammals trained by humans.
+
+
+AGENT>
+Reasoning: **Tracing communication patterns**
+
+OK, let me see. Whales, including killer whales, show patterns like Menzerath's and Zipf's laws, hinting at energy-efficient, purposeful communication within their pods.
+
