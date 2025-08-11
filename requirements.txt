@@ -1,0 +1,8 @@
+azure-identity
+azure-ai-agents==1.2.0b1
+azure-ai-projects
+python-dotenv
+azure-monitor-opentelemetry
+opentelemetry-sdk
+azure-core-tracing-opentelemetry
+opentelemetry-exporter-otlp
