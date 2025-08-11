@@ -8,6 +8,7 @@ This project demonstrates how to use Azure AI Agents with the Deep Research tool
 - Integrates Bing Search for up-to-date scientific sources.
 - Produces structured research progress logs and a final research report with citations.
 - Includes utilities for citation formatting and report generation.
+- Implements OpenTelemetry instrumentation for observability and tracing.
 
 ## Project Structure
 
