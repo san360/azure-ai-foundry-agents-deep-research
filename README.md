@@ -41,20 +41,80 @@ Refer to your Azure AI Foundry portal and Bing Search resource for the correct v
 ## Usage
 
 1. Set up your Azure resources and obtain endpoint/model names.
-2. Fill in the `.env` file as described above.
-3. Install dependencies using [uv](https://github.com/astral-sh/uv):
+2. Copy `.env.template` to `.env` and fill in your actual Azure resource values.
+
+### Option 1: Using Python Virtual Environment (venv)
+
+1. Create and activate a virtual environment:
+
+   **Windows (PowerShell):**
+
+   ```powershell
+   # Create virtual environment
+   python -m venv venv
+   
+   # Activate virtual environment
+   .\venv\Scripts\Activate.ps1
+   
+   # Install dependencies
+   pip install -r requirements.txt
+   ```
+
+   **Windows (Git Bash):**
+
+   ```bash
+   # Create virtual environment
+   python -m venv venv
+   
+   # Activate virtual environment
+   source venv/Scripts/activate
+   
+   # Install dependencies
+   pip install -r requirements.txt
+   ```
+
+   **Linux/macOS:**
+
+   ```bash
+   # Create virtual environment
+   python -m venv venv
+   
+   # Activate virtual environment
+   source venv/bin/activate
+   
+   # Install dependencies
+   pip install -r requirements.txt
+   ```
+
+2. Run the application:
+
+   ```bash
+   python main.py
+   ```
+
+3. When finished, deactivate the virtual environment:
+
+   ```bash
+   deactivate
+   ```
+
+### Option 2: Using uv (Alternative)
+
+1. Install dependencies using [uv](https://github.com/astral-sh/uv):
 
    ```sh
    uv pip install -r requirements.txt
    ```
 
-4. Run the app using uv:
+2. Run the app using uv:
 
    ```sh
    uv run main.py
    ```
 
-5. Review `research_progress.txt` for incremental findings and `research_report.md` for the final report.
+### Review Results
+
+After running the application, review `research_progress.txt` for incremental findings and `research_report.md` for the final report.
 
 ## References
 
