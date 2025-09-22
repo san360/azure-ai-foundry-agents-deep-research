@@ -136,13 +136,57 @@ class StreamlitApp:
         """Render research query interface."""
         st.subheader("Research Query")
         
+        # Handle sample topic selection
+        if "selected_topic_query" in st.session_state:
+            selected_query = st.session_state.selected_topic_query
+            del st.session_state.selected_topic_query
+        else:
+            selected_query = st.session_state.get("research_query", "")
+        
         # Research query input
         query = st.text_area(
             "Enter your research question:",
+            value=selected_query,
             height=100,
             placeholder="e.g., What are the latest developments in quantum computing?",
-            help="Enter a detailed research question. Be specific for better results."
+            help="Enter a detailed research question. Be specific for better results.",
+            key="research_query"
         )
+        
+        # Sample research topics
+        st.markdown("**🎯 Sample Research Topics** (click to populate):")
+        
+        sample_topics = [
+            {
+                "title": "Quantum Cryptography",
+                "query": "Research the current state of studies on quantum computing applications in cryptography"
+            },
+            {
+                "title": "Energy Storage Tech",
+                "query": "Investigate recent developments in sustainable energy storage technologies"
+            },
+            {
+                "title": "CRISPR Therapeutics", 
+                "query": "Explore the latest research on CRISPR gene editing and its therapeutic applications"
+            },
+            {
+                "title": "AI Climate Solutions",
+                "query": "Research advances in artificial intelligence for climate change mitigation"
+            },
+            {
+                "title": "Marine Microplastics",
+                "query": "Study the current understanding of microplastic pollution in marine ecosystems"
+            }
+        ]
+        
+        # Create topic buttons in columns
+        cols = st.columns(2)
+        for i, topic in enumerate(sample_topics):
+            col = cols[i % 2]
+            with col:
+                if st.button(f"📚 {topic['title']}", key=f"topic_{i}", help=topic['query']):
+                    st.session_state.selected_topic_query = topic['query']
+                    st.rerun()
         
         # Research button
         col1, col2 = st.columns([1, 3])

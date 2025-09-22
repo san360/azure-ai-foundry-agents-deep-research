@@ -378,6 +378,15 @@ Interactive Mode Commands:
   help, h, ?    - Show this help
   status        - Show service status
   quit, exit, q - Exit interactive mode
+
+Sample Research Topics:
+  1. Research the current state of studies on quantum computing applications in cryptography
+  2. Investigate recent developments in sustainable energy storage technologies
+  3. Explore the latest research on CRISPR gene editing and its therapeutic applications
+  4. Research advances in artificial intelligence for climate change mitigation
+  5. Study the current understanding of microplastic pollution in marine ecosystems
+
+Simply copy and paste any of these topics as your research query.
         """)
     
     def _show_status(self) -> int:
