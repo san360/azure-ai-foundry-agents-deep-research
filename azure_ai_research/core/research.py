@@ -3,7 +3,7 @@
 import logging
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Callable, Protocol, runtime_checkable
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import threading
 from concurrent.futures import ThreadPoolExecutor, Future
 import json
@@ -48,23 +48,26 @@ class ResearchRequest:
 class ResearchResult:
     """Research result with metadata and citations."""
     
+    query: str
     content: str
     citations: List[Dict[str, Any]]
     metadata: Dict[str, Any]
     execution_time_seconds: float
     success: bool
+    timestamp: datetime = field(default_factory=datetime.now)
     error_message: Optional[str] = None
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert result to dictionary for serialization."""
         return {
+            "query": self.query,
             "content": self.content,
             "citations": self.citations,
             "metadata": self.metadata,
             "execution_time_seconds": self.execution_time_seconds,
             "success": self.success,
-            "error_message": self.error_message,
-            "timestamp": datetime.now().isoformat()
+            "timestamp": self.timestamp.isoformat(),
+            "error_message": self.error_message
         }
 
 
@@ -167,16 +170,17 @@ class ResearchService:
                     
                     # Create result
                     result = ResearchResult(
+                        query=request.query,
                         content=result_content,
                         citations=citations,
                         metadata={
                             "agent_id": agent.id,
                             "thread_id": thread.id,
-                            "query": request.query,
                             "timestamp": start_time.isoformat()
                         },
                         execution_time_seconds=execution_time,
-                        success=True
+                        success=True,
+                        timestamp=start_time
                     )
                     
                     span.set_attribute("success", True)
@@ -201,11 +205,13 @@ class ResearchService:
                     progress_callback(f"Research failed: {str(e)}", 1.0, {"success": False, "error": str(e)})
                 
                 return ResearchResult(
+                    query=request.query,
                     content="",
                     citations=[],
-                    metadata={"query": request.query, "timestamp": start_time.isoformat()},
+                    metadata={"timestamp": start_time.isoformat()},
                     execution_time_seconds=execution_time,
                     success=False,
+                    timestamp=start_time,
                     error_message=error_msg
                 )
     
@@ -346,6 +352,66 @@ class ResearchService:
         except Exception as e:
             logger.error(f"Failed to save research log: {e}")
             raise FileSystemError(f"Failed to save research log: {e}")
+    
+    def save_research_report(self, result: ResearchResult, report_filename: Optional[str] = None) -> str:
+        """Save research result as a markdown report file."""
+        try:
+            if not report_filename:
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                # Sanitize query for filename
+                safe_query = "".join(c for c in result.query[:30] if c.isalnum() or c in ' -_').strip()
+                safe_query = safe_query.replace(' ', '_')
+                report_filename = f"research_report_{timestamp}_{safe_query}.md"
+            
+            # Generate markdown content
+            markdown_content = self._generate_markdown_report(result)
+            
+            # Save with text write method (assuming file handler supports it)
+            saved_path = self.file_handler.write_text(report_filename, markdown_content)
+            
+            logger.info(f"Research report saved: {saved_path}")
+            return str(saved_path)
+            
+        except Exception as e:
+            logger.error(f"Failed to save research report: {e}")
+            raise FileSystemError(f"Failed to save research report: {e}")
+    
+    def _generate_markdown_report(self, result: ResearchResult) -> str:
+        """Generate markdown formatted research report."""
+        lines = []
+        
+        # Header
+        lines.append(f"# Research Report")
+        lines.append("")
+        lines.append(f"**Query:** {result.query}")
+        lines.append(f"**Date:** {result.timestamp.strftime('%Y-%m-%d %H:%M:%S')}")
+        lines.append(f"**Duration:** {result.execution_time_seconds:.1f} seconds")
+        lines.append("")
+        
+        # Content
+        lines.append("## Research Content")
+        lines.append("")
+        lines.append(result.content)
+        lines.append("")
+        
+        # Citations
+        if result.citations:
+            lines.append("## Citations")
+            lines.append("")
+            for i, citation in enumerate(result.citations, 1):
+                title = citation.get("title", "Untitled")
+                url = citation.get("url", "")
+                lines.append(f"{i}. **{title}**")
+                if url:
+                    lines.append(f"   - Source: [{url}]({url})")
+                lines.append("")
+        
+        # Metadata
+        lines.append("---")
+        lines.append("*Generated by Azure AI Deep Research*")
+        lines.append("")
+        
+        return "\n".join(lines)
     
     def load_research_logs(self, pattern: str = "research_log_*.json") -> List[Dict[str, Any]]:
         """Load research logs from files."""

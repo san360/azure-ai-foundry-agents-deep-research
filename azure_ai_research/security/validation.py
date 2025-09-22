@@ -94,27 +94,34 @@ def sanitize_file_path(file_path: str) -> str:
     if not file_path or not isinstance(file_path, str):
         raise ValidationError("File path must be a non-empty string")
     
-    # Normalize path and resolve any relative components
+    # Check for directory traversal attempts before normalization
+    if ".." in file_path or file_path.startswith("/"):
+        raise ValidationError("File path contains invalid directory traversal")
+    
+    # Normalize path but don't resolve relative paths to absolute
     try:
-        path = Path(file_path).resolve()
+        # Use normpath instead of resolve to preserve relative paths
+        path = Path(file_path)
+        if path.is_absolute():
+            # Only resolve absolute paths
+            normalized_path = str(path.resolve())
+        else:
+            # Keep relative paths as relative, just normalize them
+            normalized_path = str(Path(file_path).as_posix())
+            # Convert back to platform-specific path separators
+            normalized_path = str(Path(normalized_path))
     except (OSError, ValueError) as e:
         raise ValidationError(f"Invalid file path: {e}")
     
-    # Convert back to string for further validation
-    normalized_path = str(path)
-    
-    # Check for directory traversal attempts
-    if ".." in normalized_path or normalized_path.startswith("/"):
-        raise ValidationError("File path contains invalid directory traversal")
-    
-    # Ensure path doesn't access system directories (Windows/Linux)
-    forbidden_prefixes = [
-        "C:\\Windows", "C:\\System32", "/etc", "/proc", "/sys", "/root"
-    ]
-    
-    for prefix in forbidden_prefixes:
-        if normalized_path.startswith(prefix):
-            raise ValidationError(f"Access to system directory not allowed: {prefix}")
+    # For absolute paths, ensure they don't access system directories
+    if Path(normalized_path).is_absolute():
+        forbidden_prefixes = [
+            "C:\\Windows", "C:\\System32", "/etc", "/proc", "/sys", "/root"
+        ]
+        
+        for prefix in forbidden_prefixes:
+            if normalized_path.startswith(prefix):
+                raise ValidationError(f"Access to system directory not allowed: {prefix}")
     
     return normalized_path
 

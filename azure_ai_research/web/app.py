@@ -279,6 +279,55 @@ class StreamlitApp:
                         st.metric("Citations Found", len(citations))
                     
                     st.json(metadata)
+                
+                # Download options
+                st.markdown("### Download Options")
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    # Generate markdown report for download
+                    if st.button("📄 Download Report (Markdown)", key="download_md"):
+                        try:
+                            # Convert result dict back to ResearchResult object for report generation
+                            from azure_ai_research.core.research import ResearchResult
+                            from datetime import datetime
+                            
+                            research_result = ResearchResult(
+                                query=result.get("query", ""),
+                                content=content,
+                                timestamp=datetime.fromisoformat(result.get("timestamp", datetime.now().isoformat())),
+                                duration=execution_time,
+                                citations=citations
+                            )
+                            
+                            # Generate markdown content
+                            markdown_content = self.research_service._generate_markdown_report(research_result)
+                            
+                            # Provide download
+                            st.download_button(
+                                label="💾 Download Research Report",
+                                data=markdown_content,
+                                file_name=f"research_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md",
+                                mime="text/markdown",
+                                key="download_report_md"
+                            )
+                        except Exception as e:
+                            st.error(f"Failed to generate report: {e}")
+                
+                with col2:
+                    # Show log file path if available
+                    log_file = self.session_manager.get_log_file()
+                    if log_file:
+                        st.info(f"📋 Log saved to: `{log_file}`")
+                    
+                    # Show recent reports saved locally
+                    try:
+                        report_files = self.file_handler.list_files("research_report_*.md")
+                        if report_files:
+                            latest_report = sorted(report_files)[-1]  # Most recent
+                            st.info(f"📄 Latest report: `{latest_report}`")
+                    except Exception:
+                        pass
             else:
                 error_msg = result.get("error_message", "Unknown error")
                 st.error(f"Research failed: {error_msg}")
@@ -367,6 +416,13 @@ class StreamlitApp:
                         log_path = self.research_service.save_research_log(result)
                         self.session_manager.set_log_file(log_path)
                         
+                        # Save as markdown report
+                        try:
+                            report_path = self.research_service.save_research_report(result)
+                            logger.info(f"Research report saved to: {report_path}")
+                        except Exception as e:
+                            logger.warning(f"Failed to save research report: {e}")
+                        
                 except Exception as e:
                     self.callback_handler.create_error_callback()(e)
             
@@ -392,6 +448,13 @@ class StreamlitApp:
                 # Save to log file
                 log_path = self.research_service.save_research_log(result)
                 self.session_manager.set_log_file(log_path)
+                
+                # Save as markdown report
+                try:
+                    report_path = self.research_service.save_research_report(result)
+                    logger.info(f"Research report saved to: {report_path}")
+                except Exception as e:
+                    logger.warning(f"Failed to save research report: {e}")
                 
             except Exception as e:
                 self.callback_handler.create_error_callback()(e)
