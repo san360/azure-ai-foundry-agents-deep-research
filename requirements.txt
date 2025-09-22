@@ -6,3 +6,9 @@ azure-monitor-opentelemetry
 opentelemetry-sdk
 azure-core-tracing-opentelemetry
 opentelemetry-exporter-otlp
+streamlit>=1.40.0
+watchdog>=6.0.0
+dataclasses-json>=0.6.3
+typing-extensions>=4.5.0
+pydantic>=2.0.0
+bleach>=6.0.0
