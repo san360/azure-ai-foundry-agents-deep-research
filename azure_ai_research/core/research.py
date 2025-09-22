@@ -36,18 +36,10 @@ class ResearchRequest:
     """Immutable research request with validation."""
     
     query: str
-    max_iterations: int = 10
-    timeout_seconds: int = 300
     enable_citations: bool = True
     
     def __post_init__(self) -> None:
         """Validate research request parameters."""
-        if self.max_iterations <= 0 or self.max_iterations > 50:
-            raise ValueError("max_iterations must be between 1 and 50")
-        
-        if self.timeout_seconds <= 0 or self.timeout_seconds > 3600:
-            raise ValueError("timeout_seconds must be between 1 and 3600")
-        
         # Validate and sanitize query
         object.__setattr__(self, 'query', validate_research_query(self.query))
 
@@ -135,7 +127,6 @@ class ResearchService:
         with self.tracing_service.trace_operation("conduct_research") as span:
             try:
                 span.set_attribute("query_length", len(request.query))
-                span.set_attribute("max_iterations", request.max_iterations)
                 
                 # Initialize progress tracking
                 if progress_callback:
@@ -182,7 +173,6 @@ class ResearchService:
                             "agent_id": agent.id,
                             "thread_id": thread.id,
                             "query": request.query,
-                            "max_iterations": request.max_iterations,
                             "timestamp": start_time.isoformat()
                         },
                         execution_time_seconds=execution_time,
@@ -293,8 +283,10 @@ class ResearchService:
             logger.debug(f"Research run started: {run.id}")
             
             # Poll for completion with progress updates
-            iteration = 0
-            while iteration < request.max_iterations:
+            import time
+            start_poll_time = time.time()
+            
+            while True:
                 run = client.agents.runs.get(thread_id=thread.id, run_id=run.id)
                 
                 if run.status == "completed":
@@ -303,21 +295,17 @@ class ResearchService:
                     raise AzureClientError(f"Research run {run.status}: {run.last_error}")
                 
                 if progress_callback:
-                    progress = 0.2 + (iteration / request.max_iterations) * 0.7
+                    elapsed_time = time.time() - start_poll_time
+                    # Simple progress indication based on elapsed time (max 90% until completion)
+                    progress = min(0.2 + (elapsed_time / 60.0) * 0.7, 0.9)
                     progress_callback(
-                        f"Research in progress... (iteration {iteration + 1})",
+                        f"Research in progress... ({run.status})",
                         progress,
-                        {"iteration": iteration + 1, "status": run.status}
+                        {"status": run.status, "elapsed_seconds": elapsed_time}
                     )
                 
-                iteration += 1
-                
                 # Brief pause before next poll
-                import time
                 time.sleep(2)
-            
-            if run.status != "completed":
-                raise AzureClientError(f"Research did not complete within {request.max_iterations} iterations")
             
             # Get the latest messages
             messages = client.agents.messages.list(thread_id=thread.id)

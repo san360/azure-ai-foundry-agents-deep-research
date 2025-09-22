@@ -102,22 +102,6 @@ class StreamlitApp:
             # Research settings
             st.subheader("Research Settings")
             
-            max_iterations = st.slider(
-                "Max Iterations",
-                min_value=1,
-                max_value=20,
-                value=10,
-                help="Maximum number of research iterations"
-            )
-            
-            timeout_seconds = st.slider(
-                "Timeout (seconds)",
-                min_value=30,
-                max_value=600,
-                value=300,
-                help="Research timeout in seconds"
-            )
-            
             enable_citations = st.checkbox(
                 "Enable Citations",
                 value=True,
@@ -125,8 +109,6 @@ class StreamlitApp:
             )
             
             # Store settings in session
-            self.session_helper.safe_set("max_iterations", max_iterations)
-            self.session_helper.safe_set("timeout_seconds", timeout_seconds)
             self.session_helper.safe_set("enable_citations", enable_citations)
             
             # Clear session button
@@ -307,15 +289,11 @@ class StreamlitApp:
             validated_query = validate_research_query(query, self.config.security.max_input_length)
             
             # Get research settings
-            max_iterations = self.session_helper.safe_get("max_iterations", 10)
-            timeout_seconds = self.session_helper.safe_get("timeout_seconds", 300)
             enable_citations = self.session_helper.safe_get("enable_citations", True)
             
             # Create research request
             request = ResearchRequest(
                 query=validated_query,
-                max_iterations=max_iterations,
-                timeout_seconds=timeout_seconds,
                 enable_citations=enable_citations
             )
             

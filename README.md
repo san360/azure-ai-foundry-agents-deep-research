@@ -259,15 +259,8 @@ service = ResearchService(config)### Review Results
 # Create research requestAfter running the application, review `research_progress.txt` for incremental findings and `research_report.md` for the final report.
 
 request = ResearchRequest(
-
-    query="Latest developments in quantum computing",## References
-
-    max_iterations=10,
-
-    timeout_seconds=300,- See `research_report.md` for a sample output and citations.
-
-    enable_citations=True- For more details, refer to the official [Deep Research Tool documentation](https://aka.ms/agents-deep-research).
-
+    query="Latest developments in quantum computing",
+    enable_citations=True
 )
 
 # Execute research with progress tracking

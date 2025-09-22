@@ -108,20 +108,6 @@ Examples:
         
         # Research options
         parser.add_argument(
-            "--max-iterations",
-            type=int,
-            default=10,
-            help="Maximum research iterations (default: 10)"
-        )
-        
-        parser.add_argument(
-            "--timeout",
-            type=int,
-            default=300,
-            help="Research timeout in seconds (default: 300)"
-        )
-        
-        parser.add_argument(
             "--no-citations",
             action="store_true",
             help="Disable citation extraction"
@@ -212,13 +198,10 @@ Examples:
             # Create research request
             request = ResearchRequest(
                 query=validated_query,
-                max_iterations=args.max_iterations,
-                timeout_seconds=args.timeout,
                 enable_citations=not args.no_citations
             )
             
             print(f"Starting research for: {query}")
-            print(f"Max iterations: {request.max_iterations}, Timeout: {request.timeout_seconds}s")
             print()
             
             # Create progress callback
@@ -368,8 +351,6 @@ Examples:
                 
                 # Execute research with default settings
                 args = argparse.Namespace(
-                    max_iterations=10,
-                    timeout=300,
                     no_citations=False,
                     format="text",
                     output=None,
